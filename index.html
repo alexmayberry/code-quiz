@@ -11,28 +11,38 @@
     <div class="wrapper">
         <div id="start">
             <div>
-                <h1>Coding Quiz</h1>
-                <p></p>
+                <div>
+                    <h1>Coding Quiz</h1>
+                    <p>Welcome to the coding game! See how many coding related questions you can answer in a minute!</p>
+                    <a href="./high-scores.html" id="high-scores">View High Scores</a>
+                </div>
                 <button id ="startbtn">Start Game</button>
             </div>
         </div>
-        <div id="questions">
-            <a href="./high-scores.html" id="high-scores">View High Scores</a>
+        <div id="questions" class="hidden">
             <p>Time Remaining: <span id="timer"></span></p>
-        </div>
-        <div>
-            <h1 id="question"></h1>
-            <div id="options">
-                <button class = 'button' id="btn1"></button>
-                <button class = 'button' id="btn2"></button>
-                <button class = 'button' id="btn3"></button>
-                <button class = 'button' gid="btn4"></button>
+            <div>
+                <h1 id="question"></h1>
+                <!-- TODO: Change my method for displaying the answer buttons so instead of hard coding 4 buttons, it dynamically creates buttons elemnts based on the length of the answers array -->
+                <div id="options">
+                    <button class = 'button' id="btn1"></button>
+                    <button class = 'button' id="btn2"></button>
+                    <button class = 'button' id="btn3"></button>
+                    <button class = 'button' gid="btn4"></button>
+                </div>
+                <h3 id="results"></h3>
             </div>
-            <h3 id="result"></h3>
         </div>
-        </div>
-        <div id="high-score-form">
-            <form action=""></form>
+        <div id="end-screen" class="hidden">
+            <div>
+                <h1>GAME OVER</h1>
+                <p>You have run out of time.</p>
+                <a href="./high-scores.html" id="high-scores">View High Scores</a>
+            </div>
+                <button id ="startbtn">Play Again</button>
+            <div id="high-score-form">
+                <form action=""></form>
+            </div>
         </div>
     </div>
     <script src="./js/game.js"></script>
