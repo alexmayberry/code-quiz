@@ -54,13 +54,11 @@ startBtn.addEventListener("click", startGame)
 function startGame(){
     hide(startScreen);
     unhide(questionsScreen);
-    startTimer();
     displayCurrentQuestion();
     displayAnswers();
     addListeners();
 }
 
-// TODO: Make Play again function
 
 function hide(item) {
     item.classList.add("hidden");
@@ -70,19 +68,15 @@ function unhide(item) {
     item.classList.remove("hidden");
 }
 
-// 'startTimer' function
-function startTimer(){
-setInterval(updateTimer, 1000);
-}
+// timer update interval that will be cleared on end game
+let updateInterval = setInterval(updateTimer, 1000);
+
 
 //Incriment timer down to 0 and end game if === 0
 function updateTimer() {
     timerEl.textContent = time;
     if (time > 0) {
         time--;
-    } else {
-        time = 0;
-        endGame();
     }
 }
 
@@ -126,7 +120,8 @@ function checkAnswers(event){
 }
 
 function advanceQuestions() {
-    if (questionPosition === questions.length - 1) {
+    if (questionPosition === questions.length - 1 || time === 0) {
+        time = 0;
         endGame();
     } else {
     questionPosition++;
@@ -137,9 +132,14 @@ function advanceQuestions() {
 
 function endGame() {
     console.log("Game ended :(");
-    clearInterval(startTimer);
+    clearInterval(updateInterval);
     hide(questionsScreen);
     unhide(endScreen);
+    
+    // Testing if userInfo object works
+    console.log("Object: " + JSON.stringify(userInfo));
+    console.log("Score: " + score);
+    console.log("userInfo.userScore: " + userInfo.userScore);
 }
 
 scoreSubmitEl.addEventListener("click", scoreSubmit)
