@@ -38,6 +38,8 @@ let btn2 = document.querySelector("#btn2");
 let btn3 = document.querySelector("#btn3");
 let resultsEl = document.querySelector("#results");
 let endScreen = document.querySelector("#end-screen");
+let scoreSubmitEl = document.querySelector("#score-submit");
+let usernameEl = document.querySelector("#username");
 
 
 // Set counter variable values
@@ -132,18 +134,6 @@ function advanceQuestions() {
     displayAnswers();
     }
 }
-// Set the starting value of `countdown`
-    // let countdown = questions.length * 5;
-
-    // Increase question positino by 1
-
-        // IF (questionPosition > questions.length) {
-        //     endGame();
-        // } else {
-        //     display the current question
-        // }
-
-    // `Display the current question`
 
 function endGame() {
     console.log("Game ended :(");
@@ -152,7 +142,22 @@ function endGame() {
     unhide(endScreen);
 }
 
- 
-    // go to high score page
+scoreSubmitEl.addEventListener("click", scoreSubmit)
 
-    // Function `recordScore`
+// object containing user info to be stored
+let userInfo = {
+    username: usernameEl.value,
+    userScore: score.value
+}
+
+function scoreSubmit() {
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    console.log(userInfo);
+    localStorage.setItem("user-score", JSON.stringify(userinfo.userScore));
+    restartGame();
+} 
+
+// TODO Restart game function
+function restartGame() {
+
+}
