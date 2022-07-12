@@ -150,8 +150,7 @@ function scoreSubmit(event) {
     highScores.push(userInfo);
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     console.log(userInfo);
-    localStorage.setItem("username", usernameEl.value);
-    localStorage.setItem("score", score);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
     saveFeedback.textContent = "Saved"
     setTimeout(restartGame, 5000)
 } 
