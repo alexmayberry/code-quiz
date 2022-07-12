@@ -49,14 +49,30 @@ let highScoreForm = document.querySelector("#high-score-form");
     let currentQuestion = questions[questionPosition].question;
     let score = 0;
     let highScores = [];
+    // timer update interval that will be cleared on end game
+    let updateInterval = 0;
 
 
 startBtn.addEventListener("click", startGame)
 scoreSubmitEl.addEventListener("click", scoreSubmit);
+playAgainBtn.addEventListener("click", restartGame);
 
 // Function `startGame`
 function startGame(){
-    hide(startScreen);
+    updateInterval = "";
+    updateInterval = setInterval(updateTimer, 1000);
+    // Hides start and end screens if visible
+    if (startScreen.classList.contains("hidden") === true) {
+        console.log("startScreen is hidden")
+    } else {
+        hide(startScreen);
+    }
+    if (endScreen.classList.contains("hidden") === true) {
+        console.log("endScreen is hidden")
+    } else {
+        hide(endScreen);
+    }
+    // Make first question and answers visible
     unhide(questionsScreen);
     displayCurrentQuestion();
     displayAnswers();
@@ -71,9 +87,6 @@ function hide(item) {
 function unhide(item) {
     item.classList.remove("hidden");
 }
-
-// timer update interval that will be cleared on end game
-let updateInterval = setInterval(updateTimer, 1000);
 
 //Incriment timer down to 0
 function updateTimer() {
@@ -142,7 +155,7 @@ function endGame() {
 
 
 function scoreSubmit(event) {
-    event.preventDefault();
+    event.preventDefault();     // Stops the page from automatically refreshing on:click
     // object containing user info to be stored
     let userInfo = {
         username: usernameEl.value,
@@ -154,10 +167,12 @@ function scoreSubmit(event) {
     console.log(userInfo);
     localStorage.setItem("highScores", JSON.stringify(highScores));
     saveFeedback.textContent = "Saved"
-    setTimeout(restartGame, 5000)
 } 
 
 // TODO Restart game function
 function restartGame() {
     console.log("restarted")
+    questionPosition = 0;       // Sets questions to first question
+    time = questions.length * 5 + 10;       // Restarts clock
+    startGame();
 }
