@@ -47,6 +47,7 @@ let saveFeedback = document.querySelector("#save-feedback");
     let time = questions.length * 5 + 10;
     let currentQuestion = questions[questionPosition].question;
     let score = 0;
+    let highScores = [];
 
 
 startBtn.addEventListener("click", startGame)
@@ -137,16 +138,20 @@ function endGame() {
     unhide(endScreen);
 }
 
-// object containing user info to be stored
-let userInfo = {
-    username: usernameEl.value,
-    userScore: score.value
-}
+
 
 function scoreSubmit(event) {
     event.preventDefault();
+    // object containing user info to be stored
+    let userInfo = {
+        username: usernameEl.value,
+        userScore: score
+    }
+    highScores.push(userInfo);
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     console.log(userInfo);
+    localStorage.setItem("username", usernameEl.value);
+    localStorage.setItem("score", score);
     saveFeedback.textContent = "Saved"
     setTimeout(restartGame, 5000)
 } 
