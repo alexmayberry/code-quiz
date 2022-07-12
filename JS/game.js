@@ -40,6 +40,7 @@ let resultsEl = document.querySelector("#results");
 let endScreen = document.querySelector("#end-screen");
 let scoreSubmitEl = document.querySelector("#score-submit");
 let usernameEl = document.querySelector("#username");
+let saveFeedback = document.querySelector("#save-feedback");
 
 
 // Set counter variable values
@@ -49,6 +50,7 @@ let usernameEl = document.querySelector("#username");
 
 
 startBtn.addEventListener("click", startGame)
+scoreSubmitEl.addEventListener("click", scoreSubmit);
 
 // Function `startGame`
 function startGame(){
@@ -71,8 +73,7 @@ function unhide(item) {
 // timer update interval that will be cleared on end game
 let updateInterval = setInterval(updateTimer, 1000);
 
-
-//Incriment timer down to 0 and end game if === 0
+//Incriment timer down to 0
 function updateTimer() {
     timerEl.textContent = time;
     if (time > 0) {
@@ -109,14 +110,13 @@ function checkAnswers(event){
         time += 5;
         score++;
     }
-    else{
+    else {
         console.log("wrong")
         // TODO: add a minus 5 seconds highlight to a new element next to the time readout
         resultsEl.textContent = "(Minus 3 seconts!) Not quite. The correct answer is " + questions[questionPosition].correctAnswer + ". " + questions[questionPosition].explination;
         time -= 3;
     }
     setTimeout(advanceQuestions, 3000);
-
 }
 
 function advanceQuestions() {
@@ -135,14 +135,7 @@ function endGame() {
     clearInterval(updateInterval);
     hide(questionsScreen);
     unhide(endScreen);
-    
-    // Testing if userInfo object works
-    console.log("Object: " + JSON.stringify(userInfo));
-    console.log("Score: " + score);
-    console.log("userInfo.userScore: " + userInfo.userScore);
 }
-
-scoreSubmitEl.addEventListener("click", scoreSubmit)
 
 // object containing user info to be stored
 let userInfo = {
@@ -150,14 +143,15 @@ let userInfo = {
     userScore: score.value
 }
 
-function scoreSubmit() {
+function scoreSubmit(event) {
+    event.preventDefault();
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     console.log(userInfo);
-    localStorage.setItem("user-score", JSON.stringify(userinfo.userScore));
-    restartGame();
+    saveFeedback.textContent = "Saved"
+    setTimeout(restartGame, 5000)
 } 
 
 // TODO Restart game function
 function restartGame() {
-
+    console.log("restarted")
 }
