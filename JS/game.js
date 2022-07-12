@@ -53,7 +53,7 @@ let highScoreForm = document.querySelector("#high-score-form");
     let updateInterval = 0;
 
 
-startBtn.addEventListener("click", startGame)
+startBtn.addEventListener("click", startGame);
 scoreSubmitEl.addEventListener("click", scoreSubmit);
 playAgainBtn.addEventListener("click", restartGame);
 
