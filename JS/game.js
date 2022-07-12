@@ -41,6 +41,7 @@ let endScreen = document.querySelector("#end-screen");
 let scoreSubmitEl = document.querySelector("#score-submit");
 let usernameEl = document.querySelector("#username");
 let saveFeedback = document.querySelector("#save-feedback");
+let highScoreForm = document.querySelector("#high-score-form");
 
 
 // Set counter variable values
@@ -148,6 +149,7 @@ function scoreSubmit(event) {
         userScore: score
     }
     highScores.push(userInfo);
+    highScoreForm.reset();  // Resets username input field
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     console.log(userInfo);
     localStorage.setItem("highScores", JSON.stringify(highScores));
