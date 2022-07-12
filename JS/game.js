@@ -20,7 +20,7 @@ let questions = [
             "document.querySelector()",
             "document.querySelectorAll()",
         ],
-        correctAnswer: "document.getElementsByClassName()",
+        correctAnswer: "ANswer 2",
         explination: "This will explination gives more information about the answer"
     }
 ];
@@ -29,6 +29,7 @@ let questions = [
 // Store all of our event related elements in variables
 let timerEl = document.querySelector("#timer");
 let startBtn = document.querySelector("#startbtn");
+let playAgainBtn = document.querySelector("#play-again-btn");
 let startScreen = document.querySelector("#start");
 let questionsScreen = document.querySelector("#questions");
 let questionEl = document.querySelector("#question");
@@ -40,8 +41,9 @@ let endScreen = document.querySelector("#end-screen");
 
 
 // Set counter variable values
-    let time = 60;
+    let time = questions.length * 5 + 10;
     let currentQuestion = questions[questionPosition].question;
+    let score = 0;
 
 
 startBtn.addEventListener("click", startGame)
@@ -56,6 +58,8 @@ function startGame(){
     addListeners();
 }
 
+// TODO: Make Play again function
+
 function hide(item) {
     item.classList.add("hidden");
 }
@@ -64,7 +68,7 @@ function unhide(item) {
     item.classList.remove("hidden");
 }
 
-// TODO: 'startTimer' function
+// 'startTimer' function
 function startTimer(){
 setInterval(updateTimer, 1000);
 }
@@ -106,14 +110,16 @@ function checkAnswers(event){
     if(event.target.innerHTML === questions[questionPosition].correctAnswer){
         console.log("Right")
         resultsEl.textContent = "Awesome, thats correct! " + questions[questionPosition].explination;
+        time += 5;
+        score++;
     }
     else{
         console.log("wrong")
         // TODO: add a minus 5 seconds highlight to a new element next to the time readout
-        resultsEl.textContent = "(Minus 5 seconts!) Not quite. The correct answer is " + questions[questionPosition].correctAnswer + ". " + questions[questionPosition].explination;
-        time -= 5;
+        resultsEl.textContent = "(Minus 3 seconts!) Not quite. The correct answer is " + questions[questionPosition].correctAnswer + ". " + questions[questionPosition].explination;
+        time -= 3;
     }
-    setTimeout(advanceQuestions, 2000);
+    setTimeout(advanceQuestions, 3000);
 
 }
 
@@ -146,11 +152,6 @@ function endGame() {
     unhide(endScreen);
 }
 
-    // Hide timer
-
-    // display end of game message, final score, and field to enter player initials and button to save score
-
-    // Clear timer interval to stop it from running
  
     // go to high score page
 
